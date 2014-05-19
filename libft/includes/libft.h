@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 15:49:51 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/14 12:09:11 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/19 10:43:19 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
 # include <unistd.h>
 # include <libft_lst.h>
 
-# define FT_ERROR -42
+# define FT_ERROR	-42
+# define WHITE		"\033[0m"
+# define RED		"\033[31m"
+# define GREEN		"\033[32m"
+# define YELLOW		"\033[33m"
+# define BLUE		"\033[34m"
+# define PURPLE		"\033[35m"
+# define CYAN		"\033[36m"
 
 void		*ft_memset(void *to_set, int value, size_t len);
 void		ft_bzero(void *to_set, size_t len);

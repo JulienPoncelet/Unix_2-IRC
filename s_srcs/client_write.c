@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   client_write.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/11 20:14:58 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 14:14:26 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/19 13:07:44 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/19 13:12:39 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-int							main(int ac, char **av)
+int						client_write(t_serveur *serveur, int cs)
 {
-	t_client				*client;
+	int					ret;
 
-	ac--;
-	av++;
-	if (check_input(ac, &av) == FT_ERROR)
-		return (EXIT_FAILURE);
-	if (!(client = init_client(av[0], ft_atoi(av[1]))))
+	ret = recv(cs, serveur->tab_fds[cs]->buf_write, SIZE, 0);
+	if (ret <= 0)
 	{
-		ft_error("client", __FILE__, __LINE__);
-		return (EXIT_FAILURE);
+		close(cs);
+		clean_fd(serveur->tab_fds[cs]);
+		printf("\n");
 	}
-	loop_client(client);
-	end_client(client);
-	return (EXIT_SUCCESS);
+	else
+		printf("%s\n", serveur->tab_fds[cs]->buf_write);
+	return (0);
 }

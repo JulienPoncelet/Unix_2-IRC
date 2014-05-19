@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/11 20:14:58 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 14:14:26 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/19 10:12:38 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/19 10:24:54 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-int							main(int ac, char **av)
+int							check_input(int ac)
 {
-	t_client				*client;
-
-	ac--;
-	av++;
-	if (check_input(ac, &av) == FT_ERROR)
-		return (EXIT_FAILURE);
-	if (!(client = init_client(av[0], ft_atoi(av[1]))))
+	if (ac != 1)
 	{
-		ft_error("client", __FILE__, __LINE__);
-		return (EXIT_FAILURE);
+		ft_putendl(S_USAGE);
+		return (FT_ERROR);
 	}
-	loop_client(client);
-	end_client(client);
-	return (EXIT_SUCCESS);
+	return (0);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_accept.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/11 20:14:58 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 14:14:26 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/12 15:33:57 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/19 13:01:12 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-int							main(int ac, char **av)
+int							ft_accept(int sd)
 {
-	t_client				*client;
+	int						cs;
+	struct sockaddr_in		csin;
+	unsigned int			clen;
 
-	ac--;
-	av++;
-	if (check_input(ac, &av) == FT_ERROR)
-		return (EXIT_FAILURE);
-	if (!(client = init_client(av[0], ft_atoi(av[1]))))
+	if ((cs = accept(sd, (struct sockaddr *)&csin, &clen)) == -1)
 	{
-		ft_error("client", __FILE__, __LINE__);
-		return (EXIT_FAILURE);
+		ft_error("serveur", __FILE__, __LINE__);
+		return (FT_ERROR);
 	}
-	loop_client(client);
-	end_client(client);
-	return (EXIT_SUCCESS);
+	return (cs);
 }

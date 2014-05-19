@@ -6,7 +6,7 @@
 #    By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/27 12:29:52 by jponcele          #+#    #+#              #
-#    Updated: 2014/05/18 15:20:41 by jponcele         ###   ########.fr        #
+#    Updated: 2014/05/19 15:12:23 by jponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,21 @@ S_NAME = serveur
 S_DIRSRC = ./s_srcs/
 S_DIROBJ = ./s_obj/
 
-S_SRC = main.c
+S_SRC = main.c\
+		check_input.c\
+		t_serveur.c\
+		t_fd.c\
+		ft_accept.c\
+		ft_bind.c\
+		ft_listen.c\
+		ft_socket.c\
+		add_client.c\
+		loop.c\
+		client_read.c\
+		client_write.c\
+		init_select.c\
+		ft_select.c\
+		check_select.c
 
 S_OBJ = $(S_SRC:.c=.o)
 
@@ -28,7 +42,17 @@ C_NAME = client
 C_DIRSRC = ./c_srcs/
 C_DIROBJ = ./c_obj/
 
-C_SRC = main.c
+C_SRC = main.c\
+		check_input.c\
+		t_client.c\
+		ft_connect.c\
+		ft_socket.c\
+		loop.c\
+		getnexttype.c\
+		nick.c\
+		channel.c\
+		who.c\
+		mp.c
 
 C_OBJ = $(C_SRC:.c=.o)
 

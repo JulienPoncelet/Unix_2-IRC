@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_select.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/11 20:14:58 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 14:14:26 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/19 13:16:25 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/19 13:30:33 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-int							main(int ac, char **av)
+void					init_select(t_serveur *serveur)
 {
-	t_client				*client;
+	int					i;
 
-	ac--;
-	av++;
-	if (check_input(ac, &av) == FT_ERROR)
-		return (EXIT_FAILURE);
-	if (!(client = init_client(av[0], ft_atoi(av[1]))))
+	i = 0;
+	serveur->max = 0;
+	FD_ZERO(&(serveur->fd_read));
+	FD_ZERO(&(serveur->fd_write));
+	while (i < MAX_CLIENT)
 	{
-		ft_error("client", __FILE__, __LINE__);
-		return (EXIT_FAILURE);
+		if (serveur->tab_fds[i]->type != FD_FREE)
+		{
+			FD_SET(i, &(serveur->fd_read));
+			if (ft_strlen(serveur->tab_fds[i]->buf_write) > 0)
+				FD_SET(i, &(serveur->fd_write));
+			serveur->max = MAX(serveur->max, i);
+		}
+		i++;
 	}
-	loop_client(client);
-	end_client(client);
-	return (EXIT_SUCCESS);
 }
