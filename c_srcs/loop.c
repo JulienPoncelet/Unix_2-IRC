@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/12 20:45:45 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 15:13:48 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/19 16:36:05 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void				loop_client(t_client *client)
 	{
 		print_prompt(client);
 		type = getnexttype(0, &line);
-		printf("%s - %d\n", line, type);
-		ft_putendl_fd(line, client->sd);
+		printw("%s - %d\n", line, type);
+		refresh();
 		if (type == QUIT)
 			break ;
 		if (type == WRONG)
@@ -42,14 +42,8 @@ void				loop_client(t_client *client)
 
 void				print_prompt(t_client *client)
 {
-	ft_putstr(CYAN);
-	ft_putstr(client->addr);
-	ft_putstr(WHITE);
-	ft_putstr(":");
-	ft_putstr(YELLOW);
-	ft_putnbr(client->port);
-	ft_putstr(WHITE);
-	ft_putstr(" > ");
+	printw("%s: ", client->nick);
+	refresh();
 }
 
 void				launch(int (*f)(t_client *), t_client *client)

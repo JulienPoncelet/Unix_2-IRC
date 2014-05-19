@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/19 10:19:09 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 15:05:52 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/19 16:36:09 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CLIENT_H
 
 # include				<arpa/inet.h>
+# include				<ncurses.h>
 # include				<get_next_line.h>
 # include				<libft.h>
 # include				<netdb.h>
@@ -38,13 +39,21 @@ enum					e_type
 
 typedef struct			s_client
 {
+	WINDOW				*win;
 	int					sd;
 	char				*addr;
 	int					port;
+	char				*nick;
 }						t_client;
 
 /*
-**						check_input.h
+**						ncurse.c
+*/
+
+void					init_ncurse(t_client *client);
+
+/*
+**						check_input.c
 */
 
 int						check_input(int ac, char ***av);
@@ -76,6 +85,7 @@ void					put_wrong(void);
 */
 
 int						getnexttype(int sson, char **line);
+char					*get_next_cmd(void);
 int						get_type(char *cmd);
 
 /*

@@ -6,7 +6,7 @@
 #    By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/27 12:29:52 by jponcele          #+#    #+#              #
-#    Updated: 2014/05/19 15:12:23 by jponcele         ###   ########.fr        #
+#    Updated: 2014/05/19 16:36:13 by jponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ C_DIRSRC = ./c_srcs/
 C_DIROBJ = ./c_obj/
 
 C_SRC = main.c\
+		ncurse.c\
 		check_input.c\
 		t_client.c\
 		ft_connect.c\
@@ -59,6 +60,7 @@ C_OBJ = $(C_SRC:.c=.o)
 C_DIROBJS = $(addprefix $(C_DIROBJ), $(C_OBJ))
 
 LFT = -L ./libft/ -lft
+LNCURSES = -L /usr/lib -lncurses
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra -g -O3
@@ -82,7 +84,7 @@ $(S_DIROBJ)%.o: $(S_DIRSRC)%.c
 $(C_NAME): $(C_DIROBJS)
 	@$(MAKE) -C ./libft
 	@printf 'Compiling ./%s binaries : [\033[32mDONE\033[0m]\n' '$(C_NAME)'
-	@$(CC) $(CFLAGS) -o $@ $^ $(HEAD) $(LFT)
+	@$(CC) $(CFLAGS) -o $@ $^ $(HEAD) $(LFT) $(LNCURSES)
 	@printf 'Compiling ./%s : [\033[32mDONE\033[0m]\n' '$(C_NAME)'
 
 $(C_DIROBJ)%.o: $(C_DIRSRC)%.c

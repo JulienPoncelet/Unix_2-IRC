@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ncurse.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/11 20:14:58 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 16:36:07 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/19 15:46:33 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/19 16:29:43 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <client.h>
 
-int							main(int ac, char **av)
+void						init_ncurse(t_client *client)
 {
-	t_client				*client;
-
-	ac--;
-	av++;
-	if (check_input(ac, &av) == FT_ERROR)
-		return (EXIT_FAILURE);
-	if (!(client = init_client(av[0], ft_atoi(av[1]))))
-	{
-		ft_error("client", __FILE__, __LINE__);
-		return (EXIT_FAILURE);
-	}
-	init_ncurse();
-	loop_client(client);
-	end_client(client);
-	endwin();
-	return (EXIT_SUCCESS);
+	client->win = initscr();
+	noecho();
+	cbreak();
+	scrollok(client->win, 1);
 }
