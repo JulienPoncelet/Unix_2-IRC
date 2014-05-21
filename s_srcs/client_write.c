@@ -15,4 +15,6 @@
 int						client_write(t_serveur *serveur, int cs)
 {
 	return (0);
+	(void)serveur;
+	(void)cs;
 }

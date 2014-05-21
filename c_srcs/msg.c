@@ -12,7 +12,7 @@
 
 #include <client.h>
 
-int							msg(t_client *client)
+char						*msg(t_client *client)
 {
 	char					tmp[1];
 

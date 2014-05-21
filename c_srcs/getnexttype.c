@@ -66,17 +66,21 @@ int							get_type(char *cmd)
 	static char				*type_cmd[TYPE_SIZE] = CMD;
 	static int				type_enum[TYPE_SIZE] = TYPE_ENUM;
 
+	i = 0;
+	while(cmd[i] && cmd[i] != ' ' && cmd[i] != '\n')
+		i++;
+	cmd[i] = 0;
 	if (!cmd || cmd[0] == '\n')
 		return (-2);
 	if (cmd[0] != '/')
 		return (MSG);
-	if (ft_strequ(cmd, "/quit\n"))
+	if (ft_strequ(cmd, "/quit"))
 		return (QUIT);
 	i = 0;
 	while (i < TYPE_SIZE)
 	{
-		if (ft_strequ(cmd, ft_strjoin(type_cmd[i], "\n")))
-			return (type_enum[i]);
+		if (ft_strequ(cmd, type_cmd[i]))
+			return (type_enum[i + 1]);
 		i++;
 	}
 	return (WRONG);

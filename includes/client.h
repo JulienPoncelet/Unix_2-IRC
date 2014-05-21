@@ -14,9 +14,10 @@
 # define CLIENT_H
 
 # include				<arpa/inet.h>
-# include				<ncurses.h>
+# include				<error.h>
 # include				<get_next_line.h>
 # include				<libft.h>
+# include				<ncurses.h>
 # include				<netdb.h>
 # include				<netinet/in.h>
 # include				<stdio.h>
@@ -88,7 +89,8 @@ int						ft_socket(void);
 
 void					loop_client(t_client *client);
 void					print_prompt(t_client *client);
-int						wrong(t_client *client);
+char					*wrong(t_client *client);
+void					put_error(t_client *client, char *error);
 
 /*
 **						getnexttype.c
@@ -119,33 +121,33 @@ int						add_ch(t_client *client);
 **						msg
 */
 
-int						msg(t_client *client);
+char					*msg(t_client *client);
 
 /*
 **						nickname
 */
 
-int						nick(t_client *client);
+char					*nick(t_client *client);
 
 /*
 **						channel
 */
 
-int						join(t_client *client);
-int						create(t_client *client);
-int						leave(t_client *client);
-int						list(t_client *client);
+char					*join(t_client *client);
+char					*create(t_client *client);
+char					*leave(t_client *client);
+char					*list(t_client *client);
 
 /*
 **						who
 */
 
-int						who(t_client *client);
+char					*who(t_client *client);
 
 /*
 **						mp
 */
 
-int						mp(t_client *client);
+char					*mp(t_client *client);
 
 #endif

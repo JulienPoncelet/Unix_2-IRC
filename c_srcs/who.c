@@ -12,7 +12,7 @@
 
 #include <client.h>
 
-int							who(t_client *client)
+char							*who(t_client *client)
 {
 	printf("WHO\n");
 	return (0);

@@ -12,7 +12,7 @@
 
 #include <client.h>
 
-int							mp(t_client *client)
+char						*mp(t_client *client)
 {
 	printf("MP\n");
 	return (0);

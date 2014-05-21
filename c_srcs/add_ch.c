@@ -36,8 +36,8 @@ int								add_ch(t_client *client)
 		client->y++;
 		client->x = 10;
 		client->curx = 10;
-		type = get_type(buf);
 		client->line = ft_strdup(buf);
+		type = get_type(buf);
 		ft_bzero(buf, SIZE);
 		return (type);
 	}

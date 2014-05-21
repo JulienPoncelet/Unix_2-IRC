@@ -12,28 +12,28 @@
 
 #include <client.h>
 
-int							join(t_client *client)
+char						*join(t_client *client)
 {
 	printf("JOIN\n");
 	return (0);
 	(void)client;
 }
 
-int							create(t_client *client)
+char						*create(t_client *client)
 {
 	printf("CREATE\n");
 	return (0);
 	(void)client;
 }
 
-int							leave(t_client *client)
+char						*leave(t_client *client)
 {
 	printf("LEAVE\n");
 	return (0);
 	(void)client;
 }
 
-int							list(t_client *client)
+char						*list(t_client *client)
 {
 	printf("LIST\n");
 	return (0);

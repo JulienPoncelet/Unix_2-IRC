@@ -12,9 +12,13 @@
 
 #include <client.h>
 
-int							nick(t_client *client)
+char						*nick(t_client *client)
 {
-	printf("NICK\n");
+	char					**split;
+
+	split = ft_strsplit(client->line, " ");
+	if (!split[1])
+		return (NICK_ARG);
+//	send split 1;
 	return (0);
-	(void)client;
 }

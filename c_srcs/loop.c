@@ -17,7 +17,8 @@ void				loop_client(t_client *client)
 	int				type;
 	int				i;
 	static int		type_enum[TYPE_SIZE] = TYPE_ENUM;
-	static int		(*type_funct[TYPE_SIZE])(t_client *) = TYPE_FUNCT;
+	static char		*(*type_funct[TYPE_SIZE])(t_client *) = TYPE_FUNCT;
+	char			*error;
 
 	while (42)
 	{
@@ -27,13 +28,15 @@ void				loop_client(t_client *client)
 		refresh();
 		if (type == QUIT)
 			break ;
+		error = NULL;
 		i = 0;
 		while (i < TYPE_SIZE)
 		{
 			if (type == type_enum[i])
-				type_funct[i](client);
+				error = type_funct[i](client);
 			i++;
 		}
+		put_error(client, error);
 	}
 }
 
@@ -43,11 +46,26 @@ void				print_prompt(t_client *client)
 	refresh();
 }
 
-int					wrong(t_client *client)
+char				*wrong(t_client *client)
 {
 	client->y++;
+	attron(COLOR_PAIR(1));
 	mvprintw(client->y, 0, "ERROR: wrong command");
+	attron(COLOR_PAIR(2));
 	client->y = client->y + 2;
 	wmove(client->win, client->y, 0);
 	return (0);
+}
+
+void				put_error(t_client *client, char *error)
+{
+	if (error)
+	{
+		client->y++;
+		attron(COLOR_PAIR(1));
+		mvprintw(client->y, 0, "ERROR: %s", error);
+		attron(COLOR_PAIR(2));
+		client->y = client->y + 2;
+		wmove(client->win, client->y, 0);
+	}
 }
