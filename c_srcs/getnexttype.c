@@ -6,46 +6,59 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/12 17:29:42 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 16:35:59 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/21 18:43:14 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <client.h>
 
-int							getnexttype(int sson, char **line)
+char					*use_key(int key, char *buf, t_client *client)
 {
-	char					**split;
-	int						type;
-
-	*line = get_next_cmd();
-	split = ft_strsplit(*line, " ");
-	type = get_type(split[0]);
-	return (type);
-	(void)sson;
-}
-
-char						*get_next_cmd(void)
-{
-	int						key;
-	char					*buf;
-	int						i;
-
-	buf = ft_strnew(4096 + 1);
-	i = 0;
-	while ((key = getch()) != 10 && i < 4096)
+	if (key > 31 && key < 127)
 	{
-		if (key > 31 && key != 127)
-		{
-			printw("%c", key);
-			buf[i] = key;
-			i++;
-		}
-		if (key == 127)
-			delch();
+		buf = add_to_buf(buf, client->curx - client->x, key);
+		client->curx++;
 	}
-	printw("\n");
+	if (key == KEY_RIGHT && client->x + ft_strlen(buf) > client->curx)
+		client->curx++;
+	if (key == KEY_LEFT && client->x != client->curx)
+		client->curx--;
+	if (key == 127 && client->x != client->curx)
+	{
+		buf = del_from_buf(buf, client->curx - client->x - 1);
+		client->curx--;
+	}
 	return (buf);
 }
+
+char						*add_to_buf(char *buf, int i, int key)
+{
+	char					tmp;
+	
+	while (buf[i])
+	{
+		tmp = buf[i];
+		buf[i] = key;
+		key = tmp;
+		i++;
+	}
+	tmp = buf[i];
+	buf[i] = key;
+	key = tmp;
+	return (buf);
+}
+
+char						*del_from_buf(char *buf, int i)
+{
+	while (buf[i])
+	{
+		buf[i] = buf[i + 1];
+		i++;
+	}
+	return (buf);
+}
+
+
 
 int							get_type(char *cmd)
 {
@@ -53,16 +66,16 @@ int							get_type(char *cmd)
 	static char				*type_cmd[TYPE_SIZE] = CMD;
 	static int				type_enum[TYPE_SIZE] = TYPE_ENUM;
 
-	if (!cmd)
-		return (-1);
+	if (!cmd || cmd[0] == '\n')
+		return (-2);
 	if (cmd[0] != '/')
 		return (MSG);
-	if (ft_strequ(cmd, "/quit"))
+	if (ft_strequ(cmd, "/quit\n"))
 		return (QUIT);
 	i = 0;
 	while (i < TYPE_SIZE)
 	{
-		if (ft_strequ(cmd, type_cmd[i]))
+		if (ft_strequ(cmd, ft_strjoin(type_cmd[i], "\n")))
 			return (type_enum[i]);
 		i++;
 	}

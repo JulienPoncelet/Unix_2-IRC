@@ -6,7 +6,7 @@
 #    By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/27 12:29:52 by jponcele          #+#    #+#              #
-#    Updated: 2014/05/19 16:36:13 by jponcele         ###   ########.fr        #
+#    Updated: 2014/05/21 17:37:25 by jponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,11 @@ C_SRC = main.c\
 		ft_connect.c\
 		ft_socket.c\
 		loop.c\
+		init_select.c\
+		ft_select.c\
+		add_ch.c\
 		getnexttype.c\
+		msg.c\
 		nick.c\
 		channel.c\
 		who.c\

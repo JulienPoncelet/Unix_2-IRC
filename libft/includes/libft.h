@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 15:49:51 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 10:43:19 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/21 13:32:56 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memchr(const void *src, int value, size_t len);
 int			ft_memcmp(const void *str1, const void *str2, size_t len);
 
-size_t		ft_strlen(const char *str);
+int			ft_strlen(const char *str);
 char		*ft_strdup(const char *src);
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strncpy(char *dst, const char *src, size_t len);

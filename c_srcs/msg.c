@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   msg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 10:03:19 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 13:32:44 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/21 14:16:50 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/21 18:43:14 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <client.h>
 
-int				ft_strlen(const char *str)
+int							msg(t_client *client)
 {
-	int			index;
+	char					tmp[1];
 
-	index = 0;
-	if (str)
-	{
-		while (str[index])
-			index++;
-	}
-	return (index);
+	ft_putstr_fd(client->nick, client->sd);
+	recv(client->sd, tmp, 1, 0);
+	ft_putstr_fd(client->line, client->sd);
+	recv(client->sd, tmp, 1, 0);
+	return (0);
 }

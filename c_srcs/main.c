@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/11 20:14:58 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 16:36:07 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/21 13:27:12 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int							main(int ac, char **av)
 		ft_error("client", __FILE__, __LINE__);
 		return (EXIT_FAILURE);
 	}
-	init_ncurse();
+	init_ncurse(client);
 	loop_client(client);
 	end_client(client);
 	endwin();

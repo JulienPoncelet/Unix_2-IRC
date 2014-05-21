@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   init_select.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 10:03:19 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 13:32:44 by jponcele         ###   ########.fr       */
+/*   Created: 2014/05/19 13:16:25 by jponcele          #+#    #+#             */
+/*   Updated: 2014/05/21 18:41:50 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <client.h>
 
-int				ft_strlen(const char *str)
+void					init_select(t_client *client)
 {
-	int			index;
-
-	index = 0;
-	if (str)
-	{
-		while (str[index])
-			index++;
-	}
-	return (index);
+	FD_ZERO(&(client->fd_read));
+	FD_SET(client->sd, &(client->fd_read));
+	FD_SET(0, &(client->fd_read));
 }

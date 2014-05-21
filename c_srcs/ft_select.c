@@ -10,16 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <serveur.h>
+#include <client.h>
 
-int						ft_select(t_serveur *serveur)
+int						ft_select(t_client *client)
 {
 	int					ret;
+	struct timeval		time;
 
-	ret = select(serveur->max + 1, &(serveur->fd_read), &(serveur->fd_write),
-			NULL, NULL);
-	if (ret == -1)
-		return (FT_ERROR);
-	serveur->select_ret = ret;
-	return (0);
+	init_select(client);
+	time.tv_sec = 1;
+	time.tv_usec = 0;
+	ret = select(client->sd + 1, &(client->fd_read), NULL, NULL, &time);
+	if (FD_ISSET(client->sd, &(client->fd_read)))
+		read_msg(client);
+	if (FD_ISSET(0, &(client->fd_read)))
+		return (add_ch(client));
+	return (-1);
+}
+
+void					read_msg(t_client *client)
+{
+	char				nick[SIZE + 1];
+	char				msg[SIZE + 1];
+
+	ft_bzero(nick, SIZE);
+	ft_bzero(msg, SIZE);
+	recv(client->sd, nick, SIZE, 0);
+	recv(client->sd, msg, SIZE, 0);
+	mvprintw(client->y++, 0, "%s: %s", nick, msg);
+	print_prompt(client);
 }

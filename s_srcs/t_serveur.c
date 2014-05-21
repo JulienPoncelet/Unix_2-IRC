@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/12 10:42:45 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 13:39:07 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/21 14:38:08 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ t_serveur						*init_serveur2(t_serveur *serveur, int sd)
 	}
 	serveur->tab_fds[sd]->type = FD_SERVEUR;
 	serveur->tab_fds[sd]->fct_read = add_client;
-	mkdir(".serveur", 0755);
-	chdir(".serveur");
 	return (serveur);
 }
 
