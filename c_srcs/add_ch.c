@@ -14,18 +14,12 @@
 
 int								add_ch(t_client *client)
 {
-	static char					*buf = NULL;
 	int							key;
 	int							type;
 
-	if (!buf)
-	{
-		client->curx = ft_strlen(client->nick) + 2;
-		buf = ft_strnew(SIZE + 1);
-	}
 	key = getch();
-	buf = use_key(key, buf, client);
-	mvprintw(client->y, client->x, "%s", buf);
+	client->buf = use_key(key, client->buf, client);
+	mvprintw(client->y, client->x, "%s", client->buf);
 	delch();
 	wmove(client->win, client->y, client->curx);
 	refresh();
@@ -35,9 +29,9 @@ int								add_ch(t_client *client)
 		if (client->y < client->maxy - 1)
 			client->y++;
 		client->curx = client->x;
-		client->line = ft_strdup(buf);
-		type = get_type(buf);
-		ft_bzero(buf, SIZE);
+		client->line = ft_strdup(client->buf);
+		type = get_type(client->buf);
+		ft_bzero(client->buf, SIZE);
 		return (type);
 	}
 	return (-1);

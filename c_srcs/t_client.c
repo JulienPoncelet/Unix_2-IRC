@@ -35,7 +35,9 @@ t_client						*init_client(char *addr, int port)
 	client->port = port;
 	client->nick = "Anonymus";
 	client->x = 10;
+	client->curx = 10;
 	client->y = 0;
+	client->buf = ft_strnew(SIZE + 1);
 	return (client);
 }
 

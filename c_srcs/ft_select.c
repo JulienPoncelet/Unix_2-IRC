@@ -42,5 +42,6 @@ void					read_msg(t_client *client)
 	if (client->y < client->maxy - 1)
 		client->y++;
 	attron(COLOR_PAIR(2));
-	print_prompt(client);
+	mvprintw(client->y, 0, "%s: %s", client->nick, client->buf);
+	refresh();
 }

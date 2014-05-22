@@ -56,6 +56,7 @@ typedef struct			s_client
 	int					y;
 	int					curx;
 	int					maxy;
+	char				*buf;
 	char				*line;
 }						t_client;
 
