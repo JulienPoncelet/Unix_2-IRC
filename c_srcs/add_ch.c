@@ -20,7 +20,7 @@ int								add_ch(t_client *client)
 
 	if (!buf)
 	{
-		client->curx = 10;
+		client->curx = ft_strlen(client->nick) + 2;
 		buf = ft_strnew(SIZE + 1);
 	}
 	key = getch();
@@ -31,11 +31,10 @@ int								add_ch(t_client *client)
 	refresh();
 	if (key == 10)
 	{
-		buf[ft_strlen(buf)] = '\n';
 		printw("\n");
-		client->y++;
-		client->x = 10;
-		client->curx = 10;
+		if (client->y < client->maxy - 1)
+			client->y++;
+		client->curx = client->x;
 		client->line = ft_strdup(buf);
 		type = get_type(buf);
 		ft_bzero(buf, SIZE);

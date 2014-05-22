@@ -31,7 +31,9 @@ S_SRC = main.c\
 		client_write.c\
 		init_select.c\
 		ft_select.c\
-		check_select.c
+		check_select.c\
+		msg.c\
+		nick.c
 
 S_OBJ = $(S_SRC:.c=.o)
 

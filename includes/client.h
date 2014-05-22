@@ -26,6 +26,8 @@
 
 # define C_USAGE		"usage: client <host> <port>"
 
+# define YPP(y, max)	((y < max) ? y++ : y)
+
 # define DOMAIN			PF_INET
 # define FAMILY			AF_INET
 # define TYPE			SOCK_STREAM

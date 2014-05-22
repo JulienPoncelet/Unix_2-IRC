@@ -50,11 +50,17 @@ t_serveur						*init_serveur2(t_serveur *serveur, int sd)
 	}
 	serveur->tab_fds[sd]->type = FD_SERVEUR;
 	serveur->tab_fds[sd]->fct_read = add_client;
+	serveur->nicks = (char **)malloc(sizeof(char *) * MAX_CLIENT);
+	serveur->nicks[0] = NULL;
+	serveur->channels = (char **)malloc(sizeof(char *) * MAX_CLIENT);
+	serveur->channels[0] = NULL;
 	return (serveur);
 }
 
 int								end_serveur(t_serveur *serveur)
 {
+	free(serveur->nicks);
+	free(serveur->channels);
 	free(serveur);
 	return (0);
 }

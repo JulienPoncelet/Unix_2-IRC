@@ -38,6 +38,15 @@
 # define FD_SERVEUR		1
 # define FD_CLIENT		2
 
+enum					e_type
+{
+	MSG, NICK, JOIN, LEAVE, CREATE, LIST, WHO, MP
+};
+
+# define TYPE_ENUM		{MSG, NICK}//, JOIN, LEAVE, CREATE, LIST, WHO, MP}
+# define TYPE_FUNCT		{msg, nick}//, join, leave, create, list, who, mp}
+# define TYPE_SIZE		2//8
+
 typedef struct			s_fd
 {
 	int					type;
@@ -45,6 +54,8 @@ typedef struct			s_fd
 	int					(*fct_write)();
 	char				buf_read[SIZE + 1];
 	char				buf_write[SIZE + 1];
+	char				*nick;
+	char				*channel;
 }						t_fd;
 
 typedef struct			s_serveur
@@ -55,6 +66,8 @@ typedef struct			s_serveur
 	fd_set				fd_read;
 	fd_set				fd_write;
 	int					select_ret;
+	char				**nicks;
+	char				**channels;
 }						t_serveur;
 
 /*
@@ -113,5 +126,20 @@ int						client_write(t_serveur *serveur, int cs);
 void					init_select(t_serveur *serveur);
 int						ft_select(t_serveur *serveur);
 void					check_select(t_serveur *serveur);
+
+/*
+**						msg.c
+*/
+
+char					*msg(t_serveur *serveur, int cs);
+
+/*
+**						nick.c
+*/
+
+char					*nick(t_serveur *serveur, int cs);
+int						nick_used(t_serveur *serveur, char *nickname);
+void					add_nick(t_serveur *serveur, char *nickname);
+void					delete_nick(t_serveur *serveur, char *nickname);
 
 #endif

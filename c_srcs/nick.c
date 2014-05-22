@@ -15,10 +15,16 @@
 char						*nick(t_client *client)
 {
 	char					**split;
+	char					tmp[1];
 
+	send(client->sd, "1", 1, 0);
 	split = ft_strsplit(client->line, " ");
 	if (!split[1])
 		return (NICK_ARG);
-//	send split 1;
+	send(client->sd, split[1], SIZE, 0);
+	recv(client->sd, tmp, 1, 0);
+	if (tmp[0] == '0')
+		return (NICK_USE);
+	client->nick = split[1];
 	return (0);
 }

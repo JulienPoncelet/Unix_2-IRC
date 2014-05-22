@@ -48,11 +48,10 @@ void				print_prompt(t_client *client)
 
 char				*wrong(t_client *client)
 {
-	client->y++;
 	attron(COLOR_PAIR(1));
-	mvprintw(client->y, 0, "ERROR: wrong command");
+	mvprintw(client->y, 0, "ERROR: wrong command\n");
 	attron(COLOR_PAIR(2));
-	client->y = client->y + 2;
+	YPP(client->y,  client->maxy - 1);
 	wmove(client->win, client->y, 0);
 	return (0);
 }
@@ -61,11 +60,10 @@ void				put_error(t_client *client, char *error)
 {
 	if (error)
 	{
-		client->y++;
 		attron(COLOR_PAIR(1));
-		mvprintw(client->y, 0, "ERROR: %s", error);
+		mvprintw(client->y, 0, "ERROR: %s\n", error);
 		attron(COLOR_PAIR(2));
-		client->y = client->y + 2;
+		YPP(client->y,  client->maxy - 1);
 		wmove(client->win, client->y, 0);
 	}
 }

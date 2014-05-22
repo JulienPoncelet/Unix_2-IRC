@@ -38,7 +38,9 @@ void					read_msg(t_client *client)
 	recv(client->sd, nick, SIZE, 0);
 	recv(client->sd, msg, SIZE, 0);
 	attroff(COLOR_PAIR(2));
-	mvprintw(client->y++, 0, "%s: %s", nick, msg);
+	mvprintw(client->y, 0, "%s: %s\n", nick, msg);
+	if (client->y < client->maxy - 1)
+		client->y++;
 	attron(COLOR_PAIR(2));
 	print_prompt(client);
 }

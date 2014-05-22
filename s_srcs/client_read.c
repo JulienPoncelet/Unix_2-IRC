@@ -12,28 +12,32 @@
 
 #include <serveur.h>
 
-int						client_read(t_serveur *serveur, int cs)
+int					client_read(t_serveur *serveur, int cs)
 {
-	int					ret;
-	int					i;
+	int				ret;
+	int				type;
+	int				i;
+	static int		type_enum[TYPE_SIZE] = TYPE_ENUM;
+	static char		*(*type_funct[TYPE_SIZE])(t_serveur *, int) = TYPE_FUNCT;
 
-	ret = recv(cs, serveur->tab_fds[cs]->buf_read, SIZE, 0);
+	ret = recv(cs, serveur->tab_fds[cs]->buf_read, 1, 0);
 	if (ret <= 0)
 	{
 		close(cs);
+		delete_nick(serveur, serveur->tab_fds[cs]->nick);
 		clean_fd(serveur->tab_fds[cs]);
 		printf("client #%d gone away\n", cs);
 	}
 	else
 	{
+		type = ft_atoi(serveur->tab_fds[cs]->buf_read);
 		i = 0;
-		while (i < MAX_CLIENT)
+		while (i < TYPE_SIZE)
 		{
-			if (serveur->tab_fds[i]->type == FD_CLIENT && i != cs)
-				send(i, serveur->tab_fds[cs]->buf_read, ret, 0);
+			if (type == type_enum[i])
+				type_funct[i](serveur, cs);
 			i++;
 		}
-		send(cs, "O", 1, 0);
 	}
 	return (0);
 }

@@ -16,9 +16,10 @@ char						*msg(t_client *client)
 {
 	char					tmp[1];
 
-	ft_putstr_fd(client->nick, client->sd);
+	send(client->sd, "0", 1, 0);
+	send(client->sd, client->nick, SIZE, 0);
 	recv(client->sd, tmp, 1, 0);
-	ft_putstr_fd(client->line, client->sd);
+	send(client->sd, client->line, SIZE, 0);
 	recv(client->sd, tmp, 1, 0);
 	return (0);
 }
