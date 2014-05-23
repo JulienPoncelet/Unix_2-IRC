@@ -30,7 +30,7 @@
 # define FAMILY			AF_INET
 # define TYPE			SOCK_STREAM
 
-# define MAX_CLIENT		42
+# define MAX_CLIENT		84
 
 # define SIZE			4096
 
@@ -43,9 +43,9 @@ enum					e_type
 	MSG, NICK, JOIN, LEAVE, CREATE, LIST, WHO, MP
 };
 
-# define TYPE_ENUM		{MSG, NICK}//, JOIN, LEAVE, CREATE, LIST, WHO, MP}
-# define TYPE_FUNCT		{msg, nick}//, join, leave, create, list, who, mp}
-# define TYPE_SIZE		2//8
+# define TYPE_ENUM		{MSG, NICK, JOIN, LEAVE, CREATE, LIST}//, WHO, MP}
+# define TYPE_FUNCT		{msg, nick, join, leave, create, list}//, who, mp}
+# define TYPE_SIZE		6//8
 
 typedef struct			s_fd
 {
@@ -55,7 +55,7 @@ typedef struct			s_fd
 	char				buf_read[SIZE + 1];
 	char				buf_write[SIZE + 1];
 	char				*nick;
-	char				*channel;
+	char				*chan;
 }						t_fd;
 
 typedef struct			s_serveur
@@ -141,5 +141,17 @@ char					*nick(t_serveur *serveur, int cs);
 int						nick_used(t_serveur *serveur, char *nickname);
 void					add_nick(t_serveur *serveur, char *nickname);
 void					delete_nick(t_serveur *serveur, char *nickname);
+
+/*
+**						channel
+*/
+
+char					*join(t_serveur *serveur, int cs);
+char					*create(t_serveur *serveur, int cs);
+char					*leave(t_serveur *serveur, int cs);
+char					*list(t_serveur *serveur, int cs);
+
+int						chan_used(t_serveur *serveur, char *chan);
+void					add_chan(t_serveur *serveur, char *chan);
 
 #endif

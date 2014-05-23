@@ -19,7 +19,8 @@ int								add_ch(t_client *client)
 
 	key = getch();
 	client->buf = use_key(key, client->buf, client);
-	mvprintw(client->y, client->x, "%s", client->buf);
+	mvprintw(client->y, 0, "[%s] %s: %s", client->chan, client->nick, 
+		client->buf);
 	delch();
 	wmove(client->win, client->y, client->curx);
 	refresh();

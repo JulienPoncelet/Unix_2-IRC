@@ -42,7 +42,7 @@ void				loop_client(t_client *client)
 
 void				print_prompt(t_client *client)
 {
-	mvprintw(client->y, 0, "%s: ", client->nick);
+	mvprintw(client->y, 0, "[%s] %s: ", client->chan, client->nick);
 	refresh();
 }
 

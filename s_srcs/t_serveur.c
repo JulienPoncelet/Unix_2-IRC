@@ -53,7 +53,8 @@ t_serveur						*init_serveur2(t_serveur *serveur, int sd)
 	serveur->nicks = (char **)malloc(sizeof(char *) * MAX_CLIENT);
 	serveur->nicks[0] = NULL;
 	serveur->channels = (char **)malloc(sizeof(char *) * MAX_CLIENT);
-	serveur->channels[0] = NULL;
+	serveur->channels[0] = ft_strdup("Home");
+	serveur->channels[1] = NULL;
 	return (serveur);
 }
 

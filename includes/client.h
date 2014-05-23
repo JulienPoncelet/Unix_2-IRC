@@ -52,6 +52,7 @@ typedef struct			s_client
 	char				*addr;
 	int					port;
 	char				*nick;
+	char				*chan;
 	int					x;
 	int					y;
 	int					curx;

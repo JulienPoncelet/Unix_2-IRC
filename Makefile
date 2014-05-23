@@ -33,7 +33,9 @@ S_SRC = main.c\
 		ft_select.c\
 		check_select.c\
 		msg.c\
-		nick.c
+		nick.c\
+		channel.c\
+		channel_annexe.c
 
 S_OBJ = $(S_SRC:.c=.o)
 

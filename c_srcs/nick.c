@@ -26,5 +26,7 @@ char						*nick(t_client *client)
 	if (tmp[0] == '0')
 		return (NICK_USE);
 	client->nick = split[1];
+	client->x = ft_strlen(client->chan) + ft_strlen(split[1]) + 5;
+	client->curx = client->x;
 	return (0);
 }

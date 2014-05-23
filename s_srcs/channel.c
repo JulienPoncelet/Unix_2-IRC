@@ -10,53 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-char						*join(t_client *client)
+char						*join(t_serveur *serveur, int cs)
 {
 	printf("JOIN\n");
 	return (0);
-	(void)client;
+	(void)serveur;
+	(void)cs;
 }
 
-char						*create(t_client *client)
+char						*create(t_serveur *serveur, int cs)
 {
-	char					**split;
-	char					tmp[1];
+	char					chan[SIZE + 1];
 
-	send(client->sd, "4", 1, 0);
-	split = ft_strsplit(client->line, " ");
-	if (!split[1])
-		return (NICK_ARG);
-	send(client->sd, split[1], SIZE, 0);
-	recv(client->sd, tmp, 1, 0);
-	if (tmp[0] == '0')
-		return (NICK_USE);
-	client->chan = split[1];
+	recv(cs, chan, SIZE, 0);
+	if (chan_used(serveur, chan))
+		send(cs, "0", 1, 0);
+	else
+	{
+		add_chan(serveur, chan);
+		serveur->tab_fds[cs]->chan = ft_strdup(chan);
+		send(cs, "1", 1, 0);
+	}
 	return (0);
 }
 
-char						*leave(t_client *client)
+char						*leave(t_serveur *serveur, int cs)
 {
 	printf("LEAVE\n");
 	return (0);
-	(void)client;
+	(void)serveur;
+	(void)cs;
 }
 
-char						*list(t_client *client)
+char						*list(t_serveur *serveur, int cs)
 {
-	char					buf[SIZE + 1];
+	int						i;
+	char					tmp[1];
 
-	send(client->sd, "5", 1, 0);
-	attroff(COLOR_PAIR(2));
-	while (recv(client->sd, buf, SIZE, 0))
+	i = 0;
+	while(serveur->channels[i])
 	{
-		if (ft_strequ(buf, "0"))
-			break ;
-		mvprintw(client->y, 0, "%s\n", buf);
-		YPP(client->y, client->maxy - 1);
-		send(client->sd, "0", 1, 0);
+		send(cs, serveur->channels[i], SIZE, 0);
+		recv(cs, tmp, 1, 0);
+		i++;
 	}
-	attron(COLOR_PAIR(2));
+	send(cs, "0", SIZE, 0);
 	return (0);
 }
