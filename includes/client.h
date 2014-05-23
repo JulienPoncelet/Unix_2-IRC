@@ -56,6 +56,7 @@ typedef struct			s_client
 	int					x;
 	int					y;
 	int					curx;
+	int					maxx;
 	int					maxy;
 	char				*buf;
 	char				*line;
@@ -153,5 +154,11 @@ char					*who(t_client *client);
 */
 
 char					*mp(t_client *client);
+
+/*
+**						ypp.c
+*/
+
+void					inc_y(t_client *client);
 
 #endif

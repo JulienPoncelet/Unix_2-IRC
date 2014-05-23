@@ -27,8 +27,7 @@ int								add_ch(t_client *client)
 	if (key == 10)
 	{
 		printw("\n");
-		if (client->y < client->maxy - 1)
-			client->y++;
+		inc_y(client);
 		client->curx = client->x;
 		client->line = ft_strdup(client->buf);
 		type = get_type(client->buf);

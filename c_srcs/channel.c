@@ -14,9 +14,19 @@
 
 char						*join(t_client *client)
 {
-	printf("JOIN\n");
+	char					**split;
+	char					tmp[1];
+
+	send(client->sd, "2", 1, 0);
+	split = ft_strsplit(client->line, " ");
+	if (!split[1])
+		return (JOIN_ARG);
+	send(client->sd, split[1], SIZE, 0);
+	recv(client->sd, tmp, 1, 0);
+	if (tmp[0] == '0')
+		return (JOIN_USE);
+	client->chan = split[1];
 	return (0);
-	(void)client;
 }
 
 char						*create(t_client *client)
@@ -38,9 +48,10 @@ char						*create(t_client *client)
 
 char						*leave(t_client *client)
 {
-	printf("LEAVE\n");
+	if (ft_strequ(client->chan, "Home"))
+		return (LEAVE_HOME);
+	client->chan = "Home";
 	return (0);
-	(void)client;
 }
 
 char						*list(t_client *client)
@@ -54,7 +65,7 @@ char						*list(t_client *client)
 		if (ft_strequ(buf, "0"))
 			break ;
 		mvprintw(client->y, 0, "%s\n", buf);
-		YPP(client->y, client->maxy - 1);
+		inc_y(client);
 		send(client->sd, "0", 1, 0);
 	}
 	attron(COLOR_PAIR(2));

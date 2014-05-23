@@ -51,7 +51,7 @@ char				*wrong(t_client *client)
 	attron(COLOR_PAIR(1));
 	mvprintw(client->y, 0, "ERROR: wrong command\n");
 	attron(COLOR_PAIR(2));
-	YPP(client->y,  client->maxy - 1);
+	inc_y(client);
 	wmove(client->win, client->y, 0);
 	return (0);
 }
@@ -63,7 +63,7 @@ void				put_error(t_client *client, char *error)
 		attron(COLOR_PAIR(1));
 		mvprintw(client->y, 0, "ERROR: %s\n", error);
 		attron(COLOR_PAIR(2));
-		YPP(client->y,  client->maxy - 1);
+		inc_y(client);
 		wmove(client->win, client->y, 0);
 	}
 }

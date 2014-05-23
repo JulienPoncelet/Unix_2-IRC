@@ -132,6 +132,7 @@ void					check_select(t_serveur *serveur);
 */
 
 char					*msg(t_serveur *serveur, int cs);
+int						is_valid(t_serveur *serveur, int cs, int i);
 
 /*
 **						nick.c

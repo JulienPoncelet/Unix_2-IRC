@@ -14,10 +14,17 @@
 
 char						*join(t_serveur *serveur, int cs)
 {
-	printf("JOIN\n");
+	char					chan[SIZE + 1];
+
+	recv(cs, chan, SIZE, 0);
+	if (!chan_used(serveur, chan))
+		send(cs, "0", 1, 0);
+	else
+	{
+		serveur->tab_fds[cs]->chan = ft_strdup(chan);
+		send(cs, "1", 1, 0);
+	}
 	return (0);
-	(void)serveur;
-	(void)cs;
 }
 
 char						*create(t_serveur *serveur, int cs)
@@ -38,10 +45,8 @@ char						*create(t_serveur *serveur, int cs)
 
 char						*leave(t_serveur *serveur, int cs)
 {
-	printf("LEAVE\n");
+	serveur->tab_fds[cs]->chan = "Home";
 	return (0);
-	(void)serveur;
-	(void)cs;
 }
 
 char						*list(t_serveur *serveur, int cs)

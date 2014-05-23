@@ -14,8 +14,6 @@
 
 void						init_ncurse(t_client *client)
 {
-	int						maxx;
-
 	client->win = initscr();
 	noecho();
 	keypad(client->win, 1);
@@ -24,5 +22,5 @@ void						init_ncurse(t_client *client)
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_BLACK, COLOR_WHITE);
 	attron(COLOR_PAIR(2));
-	getmaxyx(client->win, client->maxy, maxx);
+	getmaxyx(client->win, client->maxy, client->maxx);
 }

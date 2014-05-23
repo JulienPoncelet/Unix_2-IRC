@@ -61,7 +61,8 @@ C_SRC = main.c\
 		nick.c\
 		channel.c\
 		who.c\
-		mp.c
+		mp.c\
+		ypp.c
 
 C_OBJ = $(C_SRC:.c=.o)
 
