@@ -30,14 +30,18 @@ int						ft_select(t_client *client)
 
 void					read_msg(t_client *client)
 {
+	char				mp[1];
 	char				nick[SIZE + 1];
 	char				msg[SIZE + 1];
 
 	ft_bzero(nick, SIZE);
 	ft_bzero(msg, SIZE);
+	recv(client->sd, mp, 1, 0);
 	recv(client->sd, nick, SIZE, 0);
 	recv(client->sd, msg, SIZE, 0);
 	attroff(COLOR_PAIR(2));
+	if (mp[0] == '1')
+		attron(COLOR_PAIR(3));
 	mvprintw(client->y, 0, "[%s] %s: %s\n", client->chan, nick, msg);
 	inc_y(client);
 	attron(COLOR_PAIR(2));

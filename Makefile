@@ -35,7 +35,9 @@ S_SRC = main.c\
 		msg.c\
 		nick.c\
 		channel.c\
-		channel_annexe.c
+		channel_annexe.c\
+		mp.c\
+		who.c
 
 S_OBJ = $(S_SRC:.c=.o)
 

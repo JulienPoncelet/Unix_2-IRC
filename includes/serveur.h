@@ -43,9 +43,9 @@ enum					e_type
 	MSG, NICK, JOIN, LEAVE, CREATE, LIST, WHO, MP
 };
 
-# define TYPE_ENUM		{MSG, NICK, JOIN, LEAVE, CREATE, LIST}//, WHO, MP}
-# define TYPE_FUNCT		{msg, nick, join, leave, create, list}//, who, mp}
-# define TYPE_SIZE		6//8
+# define TYPE_ENUM		{MSG, NICK, JOIN, LEAVE, CREATE, LIST, WHO, MP}
+# define TYPE_FUNCT		{msg, nick, join, leave, create, list, who, mp}
+# define TYPE_SIZE		8
 
 typedef struct			s_fd
 {
@@ -154,5 +154,19 @@ char					*list(t_serveur *serveur, int cs);
 
 int						chan_used(t_serveur *serveur, char *chan);
 void					add_chan(t_serveur *serveur, char *chan);
+
+/*
+**						mp.c
+*/
+
+char					*mp(t_serveur *serveur, int cs);
+
+/*
+**						who.c
+*/
+
+char					*who(t_serveur *serveur, int cs);
+int						get_to(t_serveur *serveur, char *nick);
+void					send_msg_to(char *from, char *msg, char *to, int to_cs);
 
 #endif

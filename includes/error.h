@@ -3,6 +3,7 @@
 
 # define NICK_ARG			"nick: need 1 argument, 0 given."
 # define NICK_USE			"nick: nickname already used."
+# define NICK_LEN			"nick: nickname can't take more than 9 character."
 
 # define JOIN_ARG			"join: need 1 argument, 0 given."
 # define JOIN_USE			"join: this channel doesn't exist."
@@ -11,5 +12,8 @@
 
 # define CREATE_ARG			"creat: need 1 argument, 0 given."
 # define CREATE_USE			"create: channel already exist."
+
+# define MP_ARG				"msg: need 2 arguments."
+# define MP_NICK			"msg: this nickname doesn't exist."
 
 #endif

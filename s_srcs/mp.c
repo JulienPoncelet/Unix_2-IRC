@@ -10,25 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-char						*mp(t_client *client)
+char			*mp(t_serveur *serveur, int cs)
 {
-	char					**split;
-	char					tmp[1];
+	char		to[SIZE + 1];
+	char		msg[SIZE + 1];
 
-	send(client->sd, "7", 1, 0);
-	split = ft_strsplit(client->line, " ");
-	if (!split[1] || !split[2])
+	recv(cs, to, SIZE, 0);
+	if (ft_strequ(to, "0"))
+		return (0);
+	send(cs, "0", 1, 0);
+	recv(cs, msg, SIZE, 0);
+	if (!nick_used(serveur, to))
+		send(cs, "0", 1, 0);
+	else
 	{
-		send(client->sd, "0", SIZE, 0);
-		return (MP_ARG);
+		send_msg_to(serveur->tab_fds[cs]->nick, msg, to, get_to(serveur, to));
+		send(cs, "1", 1, 0);
 	}
-	send(client->sd, split[1], SIZE, 0);
-	recv(client->sd, tmp, 1, 0);
-	send(client->sd, split[2], SIZE, 0);
-	recv(client->sd, tmp, 1, 0);
-	if (tmp[0] == '0')
-		return (MP_NICK);
 	return (0);
+}
+
+int				get_to(t_serveur *serveur, char *nick)
+{
+	int			i;
+
+	i = 0;
+	while (i < MAX_CLIENT)
+	{
+		if (ft_strequ(serveur->tab_fds[i]->nick, nick))
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+void			send_msg_to(char *from, char *msg, char *to, int to_cs)
+{
+	send(to_cs, "1", 1, 0);
+	send(to_cs, to, SIZE, 0);
+	send(to_cs, msg, SIZE, 0);
+	(void)from;
 }

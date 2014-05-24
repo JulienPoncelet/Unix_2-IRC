@@ -5,6 +5,8 @@ char						*nick(t_serveur *serveur, int cs)
 	char					nickname[SIZE + 1];
 
 	recv(cs, nickname, SIZE, 0);
+	if (ft_strequ(nickname, "0"))
+		return (0);
 	if (nick_used(serveur, nickname))
 		send(cs, "0", 1, 0);
 	else

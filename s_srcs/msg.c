@@ -10,7 +10,10 @@ char						*msg(t_serveur *serveur, int cs)
 	while (i < MAX_CLIENT)
 	{
 		if (is_valid(serveur, cs, i))
+		{
+			send(i, "0", 1, 0);
 			send(i, serveur->tab_fds[cs]->buf_read, ret, 0);
+		}
 		i++;
 	}
 	send(cs, "1", 1, 0);

@@ -21,6 +21,7 @@ void						init_ncurse(t_client *client)
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_BLACK, COLOR_WHITE);
+	init_pair(3, COLOR_BLACK, COLOR_GREEN);
 	attron(COLOR_PAIR(2));
 	getmaxyx(client->win, client->maxy, client->maxx);
 }

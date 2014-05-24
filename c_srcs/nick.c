@@ -19,8 +19,13 @@ char						*nick(t_client *client)
 
 	send(client->sd, "1", 1, 0);
 	split = ft_strsplit(client->line, " ");
-	if (!split[1])
-		return (NICK_ARG);
+	if (!split[1] || ft_strlen(split[1]) > 9)
+	{
+		send(client->sd, "0", SIZE, 0);
+		if (!split[1])
+			return (NICK_ARG);
+		return (NICK_LEN);
+	}
 	send(client->sd, split[1], SIZE, 0);
 	recv(client->sd, tmp, 1, 0);
 	if (tmp[0] == '0')

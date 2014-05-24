@@ -10,21 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <serveur.h>
 
-char							*who(t_client *client)
+char							*who(t_serveur *serveur, int cs)
 {
-	char						buf[SIZE + 1];
+	int							i;
 
-	send(client->sd, "6", 1, 0);
-	while (recv(client->sd, buf, SIZE, 0))
+	i = 0;
+	while (i < MAX_CLIENT)
 	{
-		if (ft_strequ(buf, "0"))
-			break ;
-		attroff(COLOR_PAIR(2));
-		mvprintw(client->y, 0, "%s\n", buf);
-		attron(COLOR_PAIR(2));
-		inc_y(client);
+		if (i == cs || is_valid(serveur, cs, i))
+			send(cs, serveur->tab_fds[i]->nick, SIZE, 0);
+		i++;
 	}
+	send(cs, "0", SIZE, 0);
 	return (0);
 }
