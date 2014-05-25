@@ -6,15 +6,15 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/12 20:10:06 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 15:21:24 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/25 15:42:22 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <client.h>
 
-t_client						*init_client(char *addr, int port)
+t_client			*init_client(char *addr, int port)
 {
-	t_client					*client;
+	t_client		*client;
 
 	if (!(client = (t_client *)malloc(sizeof(t_client))))
 	{
@@ -31,6 +31,11 @@ t_client						*init_client(char *addr, int port)
 		ft_error("client", __FILE__, __LINE__);
 		return (NULL);
 	}
+	return (init_client2(client, addr, port));
+}
+
+t_client			*init_client2(t_client *client, char *addr, int port)
+{
 	client->addr = ft_strdup(addr);
 	client->port = port;
 	client->nick = "Anonymus";
@@ -42,7 +47,7 @@ t_client						*init_client(char *addr, int port)
 	return (client);
 }
 
-void							end_client(t_client *client)
+void				end_client(t_client *client)
 {
 	close(client->sd);
 	free(client->addr);

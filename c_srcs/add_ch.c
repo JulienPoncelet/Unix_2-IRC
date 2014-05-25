@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:34:23 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 18:19:37 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/25 15:43:00 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int								add_ch(t_client *client)
 
 	key = getch();
 	client->buf = use_key(key, client->buf, client);
-	mvprintw(client->y, 0, "[%s] %s: %s", client->chan, client->nick, 
+	mvprintw(client->y, 0, "[%s] %s: %s", client->chan, client->nick,
 		client->buf);
 	delch();
 	wmove(client->win, client->y, client->curx);

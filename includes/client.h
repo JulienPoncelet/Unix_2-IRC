@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/19 10:19:09 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 18:35:41 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/25 15:46:17 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int						check_input(int ac, char ***av);
 */
 
 t_client				*init_client(char *addr, int port);
+t_client				*init_client2(t_client *client, char *addr, int port);
 void					end_client(t_client *client);
 
 /*
@@ -154,6 +155,7 @@ char					*who(t_client *client);
 */
 
 char					*mp(t_client *client);
+char					*get_msg(char **split);
 
 /*
 **						ypp.c

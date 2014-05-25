@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/19 13:04:34 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 18:31:46 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/25 15:45:50 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int					client_read(t_serveur *serveur, int cs)
 {
-	int				ret;
 	int				type;
 	int				i;
 	static int		type_enum[TYPE_SIZE] = TYPE_ENUM;
 	static char		*(*type_funct[TYPE_SIZE])(t_serveur *, int) = TYPE_FUNCT;
 
-	ret = recv(cs, serveur->tab_fds[cs]->buf_read, 1, 0);
-	if (ret <= 0)
+	if ((recv(cs, serveur->tab_fds[cs]->buf_read, 1, 0)) <= 0)
 	{
 		close(cs);
 		delete_nick(serveur, serveur->tab_fds[cs]->nick);

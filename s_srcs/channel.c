@@ -6,7 +6,7 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/19 14:47:15 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/19 15:05:58 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/25 15:44:06 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char						*list(t_serveur *serveur, int cs)
 	char					tmp[1];
 
 	i = 0;
-	while(serveur->channels[i])
+	while (serveur->channels[i])
 	{
 		send(cs, serveur->channels[i], SIZE, 0);
 		recv(cs, tmp, 1, 0);

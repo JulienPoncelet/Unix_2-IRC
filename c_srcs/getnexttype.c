@@ -6,13 +6,13 @@
 /*   By: jponcele <jponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/12 17:29:42 by jponcele          #+#    #+#             */
-/*   Updated: 2014/05/21 18:43:14 by jponcele         ###   ########.fr       */
+/*   Updated: 2014/05/25 15:39:07 by jponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <client.h>
 
-char					*use_key(int key, char *buf, t_client *client)
+char						*use_key(int key, char *buf, t_client *client)
 {
 	if (key > 31 && key < 127)
 	{
@@ -34,7 +34,7 @@ char					*use_key(int key, char *buf, t_client *client)
 char						*add_to_buf(char *buf, int i, int key)
 {
 	char					tmp;
-	
+
 	while (buf[i])
 	{
 		tmp = buf[i];
@@ -58,8 +58,6 @@ char						*del_from_buf(char *buf, int i)
 	return (buf);
 }
 
-
-
 int							get_type(char *cmd)
 {
 	int						i;
@@ -67,7 +65,7 @@ int							get_type(char *cmd)
 	static int				type_enum[TYPE_SIZE] = TYPE_ENUM;
 
 	i = 0;
-	while(cmd[i] && cmd[i] != ' ' && cmd[i] != '\n')
+	while (cmd[i] && cmd[i] != ' ' && cmd[i] != '\n')
 		i++;
 	cmd[i] = 0;
 	if (!cmd || cmd[0] == '\n')
